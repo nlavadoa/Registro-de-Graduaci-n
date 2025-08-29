@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Invitados</title>
+  <style>
+    /* Fondo general */
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      margin: 0; 
+      padding: 0; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      height: 100vh;
+    }
+
+    /* Tarjeta del formulario */
+    .form-container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* Inputs */
+    input {
+      width: 100%; 
+      padding: 12px; 
+      margin: 10px 0; 
+      border: 1px solid #ccc; 
+      border-radius: 8px; 
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #6c63ff;
+      box-shadow: 0px 0px 8px rgba(108,99,255,0.4);
+      outline: none;
+    }
+
+    /* Botón */
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #6c63ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #574bdb;
+    }
+
+    /* Mensaje */
+    #mensaje {
+      margin-top: 15px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Registro de Invitados</h2>
+    <form id="registroForm">
+      <input type="text" id="codigo" placeholder="Código Alumno" required>
+      <input type="text" id="nombre" placeholder="Nombre Alumno" required>
+      <input type="text" id="carrera" placeholder="Carrera" required>
+      <input type="text" id="telefono" placeholder="Teléfono Alumno" required>
+      <input type="text" id="invitado1" placeholder="Invitado 1" required>
+      <input type="text" id="invitado2" placeholder="Invitado 2" required>
+      <button type="submit">Registrar</button>
+    </form>
+    <p id="mensaje"></p>
+  </div>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzbGN3TeQmt1sCk0u2v_npuMl2aHWEiqHtVqA29PrUUiS7NOS6OuXlQFVQthxiI9BGNtA/exec";
+
+    document.getElementById("registroForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const data = {
+        CodigoAlumno: document.getElementById("codigo").value,
+        NombreAlumno: document.getElementById("nombre").value,
+        Carrera: document.getElementById("carrera").value,
+        TelefonoAlumno: document.getElementById("telefono").value,
+        Invitado1: document.getElementById("invitado1").value,
+        Invitado2: document.getElementById("invitado2").value
+      };
+
+      fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data)
+      })
+      .then(res => res.text())
+      .then(msg => document.getElementById("mensaje").innerText = msg)
+      .catch(err => console.error("Error:", err));
+    });
+  </script>
+</body>
+</html>
