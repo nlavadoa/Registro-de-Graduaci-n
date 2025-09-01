@@ -1,0 +1,17 @@
+/* Fondo de la página */
+body {
+  background-color: lightblue;
+  font-family: Arial, sans-serif;
+}
+
+/* Título principal */
+h1 {
+  color: darkblue;
+  text-align: center;
+}
+
+/* Párrafos */
+p {
+  color: darkred;
+  font-size: 18px;
+}
